@@ -1,3 +1,5 @@
+//**************************************************** Recursive approach TLE ************************************************************************************
+
 #include<bits/stdc++.h>
 void solve(vector<string> &ans,string &s ,int index){
         if(index>=s.size()){
@@ -23,3 +25,27 @@ string kthPermutation(int n, int k) {
     return *out;
     
 }
+
+//******************************************************************** Best Approach *******************************************************************************
+string kthPermutation(int n, int k) {
+        int factorial=1;
+        vector<int> numbers;
+        for(int i=1; i<n;i++){
+            factorial=factorial*i;
+            numbers.push_back(i);
+        }
+        numbers.push_back(n);
+        string ans="";
+        k=k-1;
+        while(true){
+            ans=ans + to_string(numbers[k/factorial]);
+            numbers.erase(numbers.begin()+k/factorial);
+            if(numbers.size()==0){
+                break;
+            }
+            k=k%factorial;
+            factorial=factorial/numbers.size();
+        }
+        return ans;
+}
+    
