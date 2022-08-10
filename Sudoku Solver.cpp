@@ -1,5 +1,5 @@
-class Solution {
-    bool valid(vector<vector<char>>&board,int row,int col,int y)
+#include<bits/stdc++.h>
+bool valid(int board[9][9],int row,int col,int y)
 {
     for(int i=0;i<9;i++)
     {
@@ -15,16 +15,16 @@ class Solution {
     }
     return true;
 }
-bool solve(vector<vector<char>>&board)
+bool solve(int board[9][9])
 {
     for(int i=0;i<9;i++)
     {
         for(int j=0;j<9;j++)
         {
             // if we find any empty place , we try all possible numbers 1-9 at that place 
-            if(board[i][j]=='.')
+            if(board[i][j]==0)
             {
-                for(int y='1';y<='9';y++)
+                for(int y=1;y<=9;y++)
                 {// we trying to put nuber from 1-9 , and check is this valid or not
                     if(valid(board,i,j,y))
                     {
@@ -37,7 +37,7 @@ bool solve(vector<vector<char>>&board)
                         }
                         else{
                            // back track bcs if we put Y at that place we cant solve whole sudku
-                            board[i][j]='.';
+                            board[i][j]=0;
                         }
                     }
                 }
@@ -47,8 +47,6 @@ bool solve(vector<vector<char>>&board)
     }
     return true;
 }
-public:
-    void solveSudoku(vector<vector<char>>& board) {
-        solve(board);
-    }
-};
+bool isItSudoku(int matrix[9][9]) {
+    solve(matrix);
+}
